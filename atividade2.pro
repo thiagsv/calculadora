@@ -13,11 +13,7 @@ SOURCES += \
     calculator.cpp
 
 HEADERS += \
-    calculator.h \
-    clearButton.h \
-    firstOperator.h \
-    operations.h \
-    operators.h
+    calculator.h
 
 FORMS += \
     calculator.ui

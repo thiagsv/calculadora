@@ -56,3 +56,4 @@ private:
     Ui::Calculator *ui;
 };
 #endif // CALCULATOR_H
+

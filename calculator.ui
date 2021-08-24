@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1019</width>
+    <height>439</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>120</x>
       <y>20</y>
-      <width>409</width>
-      <height>260</height>
+      <width>676</width>
+      <height>379</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -31,7 +31,7 @@
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>1600000</height>
+           <height>160000</height>
           </size>
          </property>
          <property name="layoutDirection">
@@ -70,9 +70,19 @@ padding: 5px;</string>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <layout class="QGridLayout" name="numberArea">
+           <item row="1" column="1">
+            <widget class="QPushButton" name="button5">
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="text">
+              <string>5</string>
+             </property>
+            </widget>
+           </item>
            <item row="2" column="0">
             <widget class="QPushButton" name="button7">
              <property name="cursor">
@@ -80,6 +90,16 @@ padding: 5px;</string>
              </property>
              <property name="text">
               <string>7</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="button0">
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="text">
+              <string>0</string>
              </property>
             </widget>
            </item>
@@ -93,13 +113,13 @@ padding: 5px;</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="button5">
+           <item row="3" column="2">
+            <widget class="QPushButton" name="buttonClear">
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="text">
-              <string>5</string>
+              <string>Clear</string>
              </property>
             </widget>
            </item>
@@ -113,23 +133,26 @@ padding: 5px;</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="2">
-            <widget class="QPushButton" name="buttonClear">
+           <item row="1" column="0">
+            <widget class="QPushButton" name="button4">
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="text">
-              <string>Clear</string>
+              <string>4</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QPushButton" name="buttonCommon">
+           <item row="0" column="1">
+            <widget class="QPushButton" name="button2">
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
              <property name="text">
-              <string>.</string>
+              <string>2</string>
              </property>
             </widget>
            </item>
@@ -140,16 +163,6 @@ padding: 5px;</string>
              </property>
              <property name="text">
               <string>6</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QPushButton" name="button0">
-             <property name="cursor">
-              <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="text">
-              <string>0</string>
              </property>
             </widget>
            </item>
@@ -219,33 +232,27 @@ padding: 5px;</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QPushButton" name="button4">
+           <item row="3" column="0">
+            <widget class="QPushButton" name="buttonCommon">
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="text">
-              <string>4</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QPushButton" name="button2">
-             <property name="cursor">
-              <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="text">
-              <string>2</string>
+              <string>.</string>
              </property>
             </widget>
            </item>
           </layout>
          </item>
          <item>
-          <layout class="QFormLayout" name="operationsArea">
+          <layout class="QFormLayout" name="operationsArea_2">
+           <item row="0" column="1">
+            <widget class="QPushButton" name="delete_2">
+             <property name="text">
+              <string>Delete</string>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="1">
             <widget class="QPushButton" name="multiplier">
              <property name="cursor">
@@ -266,16 +273,6 @@ padding: 5px;</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
-            <widget class="QPushButton" name="minus">
-             <property name="cursor">
-              <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="text">
-              <string>-</string>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="1">
             <widget class="QPushButton" name="plus">
              <property name="cursor">
@@ -283,6 +280,16 @@ padding: 5px;</string>
              </property>
              <property name="text">
               <string>+</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="minus">
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="text">
+              <string>-</string>
              </property>
             </widget>
            </item>
@@ -303,13 +310,6 @@ border: 2px solid black;
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QPushButton" name="delete_2">
-             <property name="text">
-              <string>Delete</string>
-             </property>
-            </widget>
-           </item>
           </layout>
          </item>
         </layout>
@@ -319,17 +319,17 @@ border: 2px solid black;
     </layout>
    </widget>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1019</width>
      <height>21</height>
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

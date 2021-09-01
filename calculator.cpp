@@ -1,5 +1,6 @@
 #include "calculator.h"
 #include "ui_calculator.h"
+#include "QDebug"
 
 float result = 0.0;
 
@@ -123,7 +124,6 @@ void Calculator::on_buttonEqual_clicked()
 {
     QString label = this->ui->showResult->text();
     QStringList usefulLabel = label.split(QString(' '));
-    first(usefulLabel);
     operators(usefulLabel);
 
     //PASSAR O RESULTADO PARA SRTRING E COLOCAR NO LABEL
@@ -135,90 +135,132 @@ void Calculator::on_buttonEqual_clicked()
 //DELETE
 void Calculator::on_delete_2_clicked()
 {
+   int i = 0;
+   QString position;
+   QString support;
+   QString end;
    QString label = this->ui->showResult->text();
    QStringList usefulLabel = label.split(QString(' '));
-   QString final;
 
-   for(int i = (usefulLabel.size() - 1); i >= 0;i--){
-       if(usefulLabel.at(i) == 'x' || '+' || '-' || '/' ){
-           usefulLabel.removeAt(i);
-           break;
+
+   //PEGAR O ULTIMO ITEM DA LISTA, ADICIONAR NUMA NOVA LISTA E DIVIDIR OS ALGARISMOS DO NUMERO
+   QString lastItem = usefulLabel.last();
+   QStringList lastItemList = lastItem.split(QString());
+
+   //APAGAR O ULTIMO ALGARISMO
+   lastItemList.removeFirst();
+   lastItemList.removeLast();
+
+   //SE ESTIVER VAZIO
+   if(lastItemList.isEmpty()){
+
+       usefulLabel.removeLast();
+       usefulLabel.removeLast();
+
+       //COLOCAR EM FORMATO DE STRING
+       while(i < usefulLabel.size()){
+             if(usefulLabel.at(i) == "x" ||usefulLabel.at(i) == "+" ||usefulLabel.at(i) == "-" ||usefulLabel.at(i) == "/"){
+               position = " " + usefulLabel.at(i)+ " ";
+               support += position;
+            }else{
+               position = usefulLabel.at(i);
+               support += position;
+            }
+            i+=1;
+        }
+    //SE NÃO
+    }else{
+
+       //CONTANTENAR OS ALGARISMOS RESTANTES
+       i = 0;
+       while(i < lastItemList.size()-1){
+           QString number = lastItemList.at(i);
+           end += number;
+           i+=1;
+        }
+
+       //ATUALIZA O ULTIMO NUMERO
+       usefulLabel.last()=end;
+       i = 0;
+       //COLOCAR EM FORMATO DE STRING
+       while(i < usefulLabel.size()){
+             if(usefulLabel.at(i) == "x" ||usefulLabel.at(i) == "+" ||usefulLabel.at(i) == "-" ||usefulLabel.at(i) == "/"){
+               position = " " + usefulLabel.at(i)+ " ";
+               support += position;
+            }else{
+               position = usefulLabel.at(i);
+               support += position;
+            }
+            i+=1;
+       }
+
+       if(usefulLabel.at(usefulLabel.size()-1) == ""){
+           usefulLabel.removeLast();
        }
    }
-   usefulLabel.removeLast();
 
-   for(int i = 0; i < usefulLabel.size();i++){
-        QString a = usefulLabel.at(i) + ' ';
-        this->ui->showResult->setText(final + a);
-        final = this->ui->showResult->text();
-    }
-   usefulLabel = final.split(QString(' '));
+   this->ui->showResult->setText(support);
+
 }
 
 //FUNCOES
 
-//RESOLVE A PRIMEIRA OPERACAO DA CALCULADORA
-void first(QStringList list)
-{
-    if(list.at(1) == '+'){
-        QString firstNumber = list.at(0);
-        QString secondNumber = list.at(2);
-        float num1 = firstNumber.toFloat();
-        float num2 = secondNumber.toFloat();
-        result = num1 + num2;
-    }
-
-    if(list.at(1) == 'x'){
-        QString firstNumber = list.at(0);
-        QString secondNumber = list.at(2);
-        float num1 = firstNumber.toFloat();
-        float num2 = secondNumber.toFloat();
-        result = num1 * num2;
-    }
-
-    if(list.at(1) == '/'){
-        QString firstNumber = list.at(0);
-        QString secondNumber = list.at(2);
-        float num1 = firstNumber.toFloat();
-        float num2 = secondNumber.toFloat();
-        result = num1 / num2;
-    }
-
-    if(list.at(1) == '-'){
-        QString firstNumber = list.at(0);
-        QString secondNumber = list.at(2);
-        float num1 = firstNumber.toFloat();
-        float num2 = secondNumber.toFloat();
-        result = num1 - num2;
-    }
-}
-
-//PEGA O RESULT ARMAZENADO E REALIZA SUA RESPECTIVA OPERACAO
+//REALIZA AS OPERACOES
 void operators(QStringList usefulLabel)
 {
-    for(int i = 2; i < usefulLabel.size(); i++){
+    for(int i = 0; i < usefulLabel.size(); i++){
         if(usefulLabel.at(i) == '+'){
-            QString secondNumber = usefulLabel.at(i+1);
-            float num2 = secondNumber.toFloat();
-            result = result + num2;
+            if(result != 0){
+                QString secondNumber = usefulLabel.at(i+1);
+                float num2 = secondNumber.toFloat();
+                result = result + num2;
+            }else{
+                QString secondNumber = usefulLabel.at(i+1);
+                QString firstNumber = usefulLabel.at(i-1);
+                float num1 = firstNumber.toFloat();
+                float num2 = secondNumber.toFloat();
+                result = result + (num1 +num2);
+            }
         }
         else if(usefulLabel.at(i) == 'x'){
-            QString secondNumber = usefulLabel.at(i+1);
-            float num2 = secondNumber.toFloat();
-            result = result * num2;
-
+            if(result != 0){
+                QString secondNumber = usefulLabel.at(i+1);
+                float num2 = secondNumber.toFloat();
+                result = result * num2;
+            }else{
+                QString secondNumber = usefulLabel.at(i+1);
+                QString firstNumber = usefulLabel.at(i-1);
+                float num1 = firstNumber.toFloat();
+                float num2 = secondNumber.toFloat();
+                result = result + (num1 * num2);
+            }
         }
         else if(usefulLabel.at(i) == '/'){
-            QString secondNumber = usefulLabel.at(i+1);
-            float num2 = secondNumber.toFloat();
-            result = result / num2;
+            if(result != 0){
+                QString secondNumber = usefulLabel.at(i+1);
+                float num2 = secondNumber.toFloat();
+                result = result / num2;
+            }else{
+                QString secondNumber = usefulLabel.at(i+1);
+                QString firstNumber = usefulLabel.at(i-1);
+                float num1 = firstNumber.toFloat();
+                float num2 = secondNumber.toFloat();
+                result = result + (num1 / num2);
+            }
 
         }
         else if(usefulLabel.at(i) == '-'){
-            QString secondNumber = usefulLabel.at(i+1);
-            float num2 = secondNumber.toFloat();
-            result = result - num2;
-
+            if(result != 0){
+                QString secondNumber = usefulLabel.at(i+1);
+                float num2 = secondNumber.toFloat();
+                result = result - num2;
+            }else{
+                QString secondNumber = usefulLabel.at(i+1);
+                QString firstNumber = usefulLabel.at(i-1);
+                float num1 = firstNumber.toFloat();
+                float num2 = secondNumber.toFloat();
+                result = result + (num1 - num2);
+            }
     }
   }
 }

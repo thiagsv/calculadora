@@ -122,13 +122,23 @@ void Calculator::on_buttonClear_clicked()
 //IGUAL
 void Calculator::on_buttonEqual_clicked()
 {
+    QString last;
     QString label = this->ui->showResult->text();
     QStringList usefulLabel = label.split(QString(' '));
-    operators(usefulLabel);
 
-    //PASSAR O RESULTADO PARA SRTRING E COLOCAR NO LABEL
-    QString last;
-    last.setNum(result);
+    //CONFERIR DIVISAO POR ZERO
+    for(int i = 0; i < usefulLabel.size(); i++){
+        if(usefulLabel.at(i) == '/' && usefulLabel.at(i+1) == '0'){
+            last = "ERRO: Impossivel dividir por zero";
+            break;
+        }
+        else{
+            operators(usefulLabel);
+            //PASSAR O RESULTADO PARA SRTRING E COLOCAR NO LABEL
+            last.setNum(result);
+        }
+    }
+    qDebug() << last;
     this->ui->showResult->setText(last);
 }
 
@@ -141,7 +151,6 @@ void Calculator::on_delete_2_clicked()
    QString end;
    QString label = this->ui->showResult->text();
    QStringList usefulLabel = label.split(QString(' '));
-
 
    //PEGAR O ULTIMO ITEM DA LISTA, ADICIONAR NUMA NOVA LISTA E DIVIDIR OS ALGARISMOS DO NUMERO
    QString lastItem = usefulLabel.last();
